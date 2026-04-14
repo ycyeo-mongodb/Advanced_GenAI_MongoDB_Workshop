@@ -38,7 +38,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Product Search API", lifespan=lifespan)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="../frontend"), name="static")
 
 
 def get_query_embedding(text: str) -> list[float]:
@@ -202,5 +202,5 @@ def get_orders(user_name: str = Query(...)):
 
 @app.get("/", response_class=HTMLResponse)
 def root():
-    with open("static/index.html") as f:
+    with open("../frontend/index.html") as f:
         return f.read()

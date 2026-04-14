@@ -18,7 +18,7 @@ coll = client["workshop"]["products"]
 vo = voyageai.Client(api_key=os.environ["VOYAGE_API_KEY"])
 
 # Load the product catalog
-with open(Path("data/products.json")) as f:
+with open(Path(__file__).resolve().parent.parent / "backend" / "data" / "products.json") as f:
     products = json.load(f)
 
 print(f"Loaded {len(products)} products")
