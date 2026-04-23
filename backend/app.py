@@ -208,6 +208,45 @@ def get_orders(user_name: str = Query(...)):
     return {"orders": orders}
 
 
+class SellerProduct(BaseModel):
+    name: str
+    price: float
+
+
+@app.post("/api/seller/add-product")
+def seller_add_product(product: SellerProduct):
+    doc = {
+        "name": product.name,
+        "price": round(product.price, 2),
+        "status": "pending_enrichment",
+        "created_at": datetime.now(timezone.utc),
+    }
+    result = coll.insert_one(doc)
+    return {
+        "id": str(result.inserted_id),
+        "name": doc["name"],
+        "price": doc["price"],
+        "status": doc["status"],
+    }
+
+
+@app.get("/api/seller/recent")
+def seller_recent(limit: int = Query(10, ge=1, le=30)):
+    from bson import ObjectId
+    cursor = coll.find().sort("_id", -1).limit(limit)
+    items = []
+    for doc in cursor:
+        doc["_id"] = str(doc["_id"])
+        doc["has_embedding"] = "description_embedding" in doc
+        doc.pop("description_embedding", None)
+        if "created_at" in doc and isinstance(doc["created_at"], datetime):
+            doc["created_at"] = doc["created_at"].isoformat()
+        if "enriched_at" in doc and isinstance(doc["enriched_at"], datetime):
+            doc["enriched_at"] = doc["enriched_at"].isoformat()
+        items.append(doc)
+    return {"products": items}
+
+
 @app.get("/", response_class=HTMLResponse)
 def root():
     with open("../frontend/index.html") as f:

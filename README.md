@@ -10,15 +10,15 @@ An advanced hands-on workshop: build AI-powered e-commerce search with **MongoDB
 - Run a FastAPI server with a browser-based product search UI
 
 ### Part 2: Multi-Agent AI
-- **Catalog Watcher Agent** — uses MongoDB Change Streams to detect new product inserts in real time
-- **Product Enrichment Agent** — calls Claude 4.5 Haiku to generate descriptions, categories, tags, and embeddings for bare products
-- **Shopping Assistant Agent** — conversational AI with tool-use that searches, compares, and recommends products
+- **MongoDB Change Streams** — real-time product enrichment pipeline with a Seller Dashboard UI
+- **AI Shopping Agent** — conversational chat bubble with tool-use (search, compare, add to cart)
+- **Virtual Try-On** — style analysis with Claude Vision and image generation with Nova Canvas
 
 ## Repository Structure
 
 ```
 ├── backend/                  # FastAPI application
-│   ├── app.py                # Full app (all search modes implemented)
+│   ├── app.py                # Full app (all search modes + seller endpoints)
 │   ├── app_starter.py        # Skeleton app (developer track — fill in TODOs)
 │   ├── requirements.txt      # Python dependencies
 │   ├── data/
@@ -36,8 +36,10 @@ An advanced hands-on workshop: build AI-powered e-commerce search with **MongoDB
 │   ├── 06_catalog_watcher.py # Change Streams agent — watches for new products
 │   ├── 07_add_bare_product.py# Insert bare product to trigger enrichment
 │   └── 08_shopping_assistant.py # Conversational shopping agent with tool use
-├── aws/                      # AWS Lambda function
-│   └── lambda_function.py    # Bedrock proxy (answer + converse actions)
+├── aws/                      # AWS Lambda functions (AI agent backends)
+│   ├── leafy_agent_handler.py  # AI Shopping Agent (tool-use loop)
+│   ├── leafy_tryon_handler.py  # Virtual Try-On (Claude Vision + Nova Canvas)
+│   └── deploy_lambdas.sh       # Deployment script (instructor use only)
 ├── .env.example
 └── .gitignore
 ```
@@ -48,8 +50,8 @@ An advanced hands-on workshop: build AI-powered e-commerce search with **MongoDB
 |---|---|
 | MongoDB Atlas | Document database, Vector Search, Atlas Search, Change Streams |
 | Voyage AI | Embeddings (`voyage-4-large`), Reranking (`rerank-2.5`) |
-| Amazon Bedrock | Claude 4.5 Haiku — enrichment + shopping assistant (tool use) |
-| AWS Lambda | Serverless Bedrock proxy behind API Gateway |
+| Amazon Bedrock | Claude 4.5 Haiku (enrichment, agent), Nova Canvas (image gen) |
+| AWS Lambda | Serverless AI agent backends behind API Gateway |
 | FastAPI | Python API server |
 
 ## Quick Start
@@ -68,23 +70,41 @@ pip install -r backend/requirements.txt
 
 # Configure environment
 cp .env.example .env
-# Edit .env with your MongoDB URI, Voyage AI key, and Bedrock API URL
+# Edit .env — see "Environment Variables" below
+```
 
-# Run the numbered scripts in order
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+| Variable | Where to get it |
+|---|---|
+| `MONGODB_URI` | Your MongoDB Atlas connection string (free tier works) |
+| `VOYAGE_API_KEY` | Atlas → Services → AI Models → Create model API key |
+| `BEDROCK_API_URL` | **Provided by the workshop instructor** |
+
+> **Note:** The `BEDROCK_API_URL` is the API Gateway endpoint for the AWS Lambda AI backends. During a live workshop, your instructor will provide this. For self-paced learners, you'll need to deploy the Lambda functions in the `aws/` directory to your own AWS account.
+
+## Running the Workshop
+
+### Part 1: Search
+
+```bash
 python scripts/01_load_and_embed.py     # Load products + generate embeddings
-python scripts/02_create_indexes.py     # Create search indexes
+python scripts/02_create_indexes.py     # Create search indexes (wait until READY)
 python scripts/03_semantic_search.py    # Test semantic search
 python scripts/04_hybrid_search.py      # Test hybrid search
 python scripts/05_reranking.py          # Test reranking
 
-# Start the search app (run from backend/ directory)
+# Start the search app
 cd backend
 uvicorn app:app --reload        # Open http://localhost:8000
-cd ..
+```
 
-# --- Part 2: Agents ---
+### Part 2: Agents
 
-# Terminal 1: Start the Catalog Watcher
+```bash
+# Terminal 1: Start the Catalog Watcher (keep running)
 python scripts/06_catalog_watcher.py
 
 # Terminal 2: Insert a bare product (triggers enrichment)
@@ -94,22 +114,14 @@ python scripts/07_add_bare_product.py
 python scripts/08_shopping_assistant.py
 ```
 
-## API Gateway Endpoint
-
-The Bedrock proxy Lambda is deployed at:
-
-```
-POST https://kllxjgmeg3.execute-api.us-east-1.amazonaws.com/genai_workshop
-```
-
-Supported actions:
-- `{"action": "answer", "question": "...", "context": "..."}` — Text generation (product enrichment)
-- `{"action": "converse", "messages": [...], "tools": [...]}` — Multi-turn conversation with tool use
-- `{"action": "health"}` — Health check
+Then open http://localhost:8000 and explore:
+- **Seller Dashboard** — click in the header to add products and watch AI enrichment live
+- **AI Shopping Agent** — click the chat bubble in the bottom-right corner
+- **Virtual Try-On** — click "Try On" on any clothing/shoes/bags product
 
 ## Prerequisites
 
 - Python 3.10+
 - MongoDB Atlas account (free tier works)
 - Voyage AI API key (via Atlas → Services → AI Models)
-- Bedrock API URL (provided by instructor, needed for Part 2)
+- Bedrock API URL (provided by instructor)

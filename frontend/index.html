@@ -410,6 +410,294 @@
     .footer strong { color: var(--mongo-green-light); }
     .footer a { color: var(--mongo-spring); }
 
+    /* ===== SELLER PAGE ===== */
+    .seller-page {
+      display: none; max-width: 1400px; margin: 0 auto; padding: 1rem;
+      flex: 1;
+    }
+    .seller-page.visible { display: block; }
+    .seller-page-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .seller-page-header h1 {
+      font-size: 1.5rem; font-weight: 900; color: var(--mongo-green-dark);
+    }
+    .seller-page-header p { font-size: 0.8125rem; color: var(--mongo-muted); margin-top: 0.15rem; }
+    .seller-back-btn {
+      padding: 0.5rem 1rem; border: 1px solid var(--mongo-border); border-radius: 8px;
+      background: #fff; font-size: 0.8125rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      color: var(--mongo-green-dark); transition: background 0.15s;
+    }
+    .seller-back-btn:hover { background: var(--mongo-mist); }
+    .seller-grid {
+      display: grid; grid-template-columns: 360px 1fr; gap: 1.25rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .seller-grid { grid-template-columns: 1fr; } }
+
+    .seller-form-panel {
+      background: var(--mongo-card); border-radius: 12px; padding: 1.5rem;
+      border: 1px solid var(--mongo-border); box-shadow: var(--shadow-card);
+    }
+    .seller-form-panel h2 {
+      font-size: 1rem; font-weight: 800; color: var(--mongo-green-dark); margin-bottom: 0.25rem;
+    }
+    .seller-form-panel .form-sub {
+      font-size: 0.75rem; color: var(--mongo-muted); margin-bottom: 1rem; line-height: 1.5;
+    }
+    .seller-field { margin-bottom: 1rem; }
+    .seller-field label {
+      display: block; font-size: 0.75rem; font-weight: 700; color: var(--mongo-text);
+      margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .seller-input {
+      width: 100%; padding: 0.65rem 0.85rem; border: 1px solid var(--mongo-border); border-radius: 8px;
+      font-size: 0.9375rem; font-family: inherit; outline: none; background: #fff;
+    }
+    .seller-input:focus { border-color: var(--mongo-green); box-shadow: 0 0 0 3px rgba(0,104,74,0.1); }
+    .seller-submit {
+      width: 100%; padding: 0.75rem; background: var(--mongo-green); color: #fff; border: none; border-radius: 8px;
+      font-size: 0.9375rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      transition: background 0.15s;
+    }
+    .seller-submit:hover { background: var(--mongo-green-dark); }
+    .seller-submit:disabled { opacity: 0.5; cursor: default; }
+    .seller-what-happens {
+      margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--mongo-border);
+    }
+    .seller-what-happens h3 {
+      font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--mongo-muted); margin-bottom: 0.6rem;
+    }
+    .pipeline-step {
+      display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.5rem;
+    }
+    .pipeline-num {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.625rem; font-weight: 800;
+    }
+    .pipeline-num.green { background: var(--mongo-green); color: #fff; }
+    .pipeline-num.amber { background: #f59e0b; color: #fff; }
+    .pipeline-num.violet { background: #7c3aed; color: #fff; }
+    .pipeline-text { font-size: 0.75rem; color: var(--mongo-text); line-height: 1.45; }
+
+    .seller-feed-panel h2 {
+      font-size: 1rem; font-weight: 800; color: var(--mongo-green-dark); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .feed-live-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #ef4444;
+      animation: pulse-live 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-live { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)} }
+
+    .feed-card {
+      background: var(--mongo-card); border: 1px solid var(--mongo-border); border-radius: 12px;
+      padding: 1rem; margin-bottom: 0.75rem; box-shadow: var(--shadow-card);
+      transition: border-color 0.5s, box-shadow 0.5s;
+    }
+    .feed-card.enriched {
+      border-color: var(--mongo-green);
+      box-shadow: 0 0 0 1px var(--mongo-green), 0 2px 8px rgba(0,104,74,0.1);
+    }
+    .feed-card-top {
+      display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;
+    }
+    .feed-card-name { font-size: 1rem; font-weight: 800; color: var(--mongo-text); }
+    .feed-card-price { font-size: 1rem; font-weight: 800; color: var(--mongo-green-dark); }
+    .feed-status {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.6875rem; font-weight: 700; padding: 0.2rem 0.6rem;
+      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .feed-status.pending {
+      background: #fef3c7; color: #92400e;
+    }
+    .feed-status.active { background: #dcfce7; color: #166534; }
+    @keyframes pulse-orange { 0%,100%{opacity:1}50%{opacity:0.5} }
+    .feed-status.pending { animation: pulse-orange 1.5s ease-in-out infinite; }
+
+    .feed-fields { margin-top: 0.75rem; display: grid; gap: 0.5rem; }
+    .feed-field {
+      padding: 0.6rem 0.75rem; border-radius: 8px; font-size: 0.8125rem; line-height: 1.5;
+    }
+    .feed-field-label {
+      font-size: 0.625rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+    .feed-field.empty {
+      background: #f8f9fa; border: 1px dashed #d1d5db; color: #9ca3af;
+    }
+    .feed-field.empty .feed-field-label { color: #9ca3af; }
+    .feed-field.filled {
+      background: var(--mongo-mist); border: 1px solid rgba(0,104,74,0.15); color: var(--mongo-text);
+    }
+    .feed-field.filled .feed-field-label { color: var(--mongo-green); }
+    .feed-field-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.25rem; }
+    .feed-tag {
+      font-size: 0.625rem; font-weight: 600; background: var(--mongo-green); color: #fff;
+      padding: 0.15rem 0.45rem; border-radius: 4px;
+    }
+    .feed-field.embedding {
+      background: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 100%);
+      border: 1px solid #c4b5fd; color: #5b21b6;
+    }
+    .feed-field.embedding .feed-field-label { color: #7c3aed; }
+    .feed-field.embedding-empty {
+      background: #f8f9fa; border: 1px dashed #d1d5db; color: #9ca3af;
+    }
+    .feed-field.embedding-empty .feed-field-label { color: #9ca3af; }
+    .feed-enriched-by {
+      margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.6875rem; color: var(--mongo-muted);
+    }
+    .feed-enriched-by .by-badge {
+      background: var(--mongo-slate); color: var(--mongo-green-light);
+      padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;
+    }
+
+    /* ===== CHAT BUBBLE ===== */
+    .chat-fab {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 80;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--mongo-green); border: none; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,104,74,0.35);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,104,74,0.45); }
+    .chat-fab svg { width: 28px; height: 28px; fill: #fff; }
+    .chat-panel {
+      position: fixed; bottom: 5.5rem; right: 1.5rem; z-index: 81;
+      width: 400px; max-width: calc(100vw - 2rem); height: 520px; max-height: calc(100vh - 8rem);
+      background: var(--mongo-card); border-radius: 16px;
+      border: 1px solid var(--mongo-border);
+      box-shadow: 0 12px 48px rgba(0,30,43,0.2);
+      display: flex; flex-direction: column;
+      transform: scale(0.9) translateY(20px); opacity: 0; pointer-events: none;
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
+    }
+    .chat-panel.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: auto; }
+    .chat-header {
+      padding: 0.85rem 1rem; border-bottom: 1px solid var(--mongo-border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--mongo-slate); border-radius: 16px 16px 0 0; color: #fff;
+    }
+    .chat-header h3 { font-size: 0.9rem; font-weight: 800; }
+    .chat-header-sub { font-size: 0.65rem; color: rgba(255,255,255,0.5); }
+    .chat-close { background: none; border: none; color: rgba(255,255,255,0.6); font-size: 1.25rem; cursor: pointer; padding: 0.25rem; }
+    .chat-close:hover { color: #fff; }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .chat-msg {
+      max-width: 85%; padding: 0.65rem 0.85rem; border-radius: 12px;
+      font-size: 0.8125rem; line-height: 1.55; word-wrap: break-word;
+    }
+    .chat-msg.user {
+      align-self: flex-end; background: var(--mongo-green); color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-msg.assistant {
+      align-self: flex-start; background: var(--mongo-mist); color: var(--mongo-text);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.tool-info {
+      align-self: flex-start; background: #f0f4ff; color: #4338ca;
+      font-size: 0.75rem; font-weight: 600; padding: 0.4rem 0.7rem;
+      border-radius: 8px; border: 1px solid #c7d2fe;
+    }
+    .chat-msg.thinking {
+      align-self: flex-start; background: var(--mongo-mist); color: var(--mongo-muted);
+      font-size: 0.75rem; font-style: italic;
+    }
+    .chat-input-row {
+      padding: 0.75rem; border-top: 1px solid var(--mongo-border);
+      display: flex; gap: 0.5rem;
+    }
+    .chat-input {
+      flex: 1; border: 1px solid var(--mongo-border); border-radius: 8px;
+      padding: 0.55rem 0.75rem; font-size: 0.8125rem; font-family: inherit; outline: none;
+    }
+    .chat-input:focus { border-color: var(--mongo-green); }
+    .chat-send {
+      background: var(--mongo-green); border: none; border-radius: 8px;
+      padding: 0.55rem 1rem; color: #fff; font-weight: 700; font-size: 0.8125rem;
+      cursor: pointer; font-family: inherit; white-space: nowrap;
+    }
+    .chat-send:hover { background: var(--mongo-green-dark); }
+    .chat-send:disabled { opacity: 0.5; cursor: default; }
+
+    /* ===== TRY-ON MODAL ===== */
+    .tryon-overlay {
+      position: fixed; inset: 0; z-index: 95;
+      background: rgba(0,30,43,0.6); display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .tryon-overlay.open { opacity: 1; pointer-events: auto; }
+    .tryon-modal {
+      background: var(--mongo-card); border-radius: 16px; width: 720px; max-width: 95vw;
+      max-height: 90vh; overflow-y: auto; box-shadow: 0 16px 64px rgba(0,30,43,0.3);
+      transform: scale(0.95); transition: transform 0.25s;
+    }
+    .tryon-overlay.open .tryon-modal { transform: scale(1); }
+    .tryon-modal-header {
+      padding: 1rem 1.25rem; border-bottom: 1px solid var(--mongo-border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--mongo-mist); border-radius: 16px 16px 0 0;
+    }
+    .tryon-modal-header h2 { font-size: 1rem; font-weight: 800; color: var(--mongo-green-dark); }
+    .tryon-modal-close {
+      background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--mongo-muted);
+    }
+    .tryon-body { padding: 1.25rem; }
+    .tryon-upload-area {
+      border: 2px dashed var(--mongo-border); border-radius: 12px; padding: 2rem;
+      text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .tryon-upload-area:hover { border-color: var(--mongo-green); background: var(--mongo-mist); }
+    .tryon-upload-area.has-image { border-style: solid; border-color: var(--mongo-green); padding: 0.5rem; }
+    .tryon-upload-area img { max-width: 100%; max-height: 300px; border-radius: 8px; }
+    .tryon-upload-label { color: var(--mongo-muted); font-size: 0.875rem; }
+    .tryon-upload-label strong { color: var(--mongo-text); display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+    .tryon-product-info {
+      margin-top: 1rem; padding: 0.75rem; background: var(--mongo-mist); border-radius: 8px;
+      font-size: 0.875rem; display: flex; align-items: center; gap: 0.75rem;
+    }
+    .tryon-product-info img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+    .tryon-actions { margin-top: 1rem; display: flex; gap: 0.75rem; }
+    .tryon-btn {
+      flex: 1; padding: 0.7rem; border: none; border-radius: 8px; font-size: 0.875rem;
+      font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.15s;
+    }
+    .tryon-btn-primary { background: var(--mongo-green); color: #fff; }
+    .tryon-btn-primary:hover { background: var(--mongo-green-dark); }
+    .tryon-btn-primary:disabled { opacity: 0.5; cursor: default; }
+    .tryon-btn-secondary { background: var(--mongo-mist); color: var(--mongo-green-dark); border: 1px solid var(--mongo-border); }
+    .tryon-results { margin-top: 1.25rem; }
+    .tryon-results h3 { font-size: 0.9375rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--mongo-green-dark); }
+    .tryon-analysis {
+      background: var(--mongo-mist); border-radius: 10px; padding: 1rem;
+      font-size: 0.8125rem; line-height: 1.65; color: var(--mongo-text); white-space: pre-wrap;
+    }
+    .tryon-score {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--mongo-green); color: #fff; padding: 0.3rem 0.75rem;
+      border-radius: 20px; font-size: 0.875rem; font-weight: 800; margin-bottom: 0.75rem;
+    }
+    .tryon-gen-image {
+      margin-top: 1rem; text-align: center;
+    }
+    .tryon-gen-image img {
+      max-width: 100%; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .tryon-gen-placeholder {
+      background: var(--mongo-mist); border-radius: 12px; padding: 3rem;
+      color: var(--mongo-muted); font-size: 0.875rem; text-align: center;
+    }
+
     /* ===== HERO BANNER ===== */
     .hero-banner {
       background: linear-gradient(135deg, var(--mongo-green) 0%, var(--mongo-green-dark) 100%);
@@ -465,6 +753,10 @@
     </div>
 
     <div class="header-actions">
+      <button class="header-btn" id="sellerBtn">
+        <span class="header-btn-sub">Seller</span>
+        <span class="header-btn-main">Dashboard</span>
+      </button>
       <button class="header-btn" id="ordersBtn">
         <span class="header-btn-sub">Your</span>
         <span class="header-btn-main">Orders</span>
@@ -539,6 +831,113 @@
   </section>
 </div>
 
+<!-- SELLER PAGE (full-page, hidden by default) -->
+<div class="seller-page" id="sellerPage">
+  <div class="seller-page-header">
+    <div>
+      <h1>Seller Dashboard</h1>
+      <p>Add products and watch AI enrich them in real time via Change Streams</p>
+    </div>
+    <button class="seller-back-btn" id="sellerBackBtn">&larr; Back to Shop</button>
+  </div>
+  <div class="seller-grid">
+    <div class="seller-form-panel">
+      <h2>List a New Product</h2>
+      <p class="form-sub">Enter just a name and price. The AI Enrichment Agent will generate everything else automatically.</p>
+      <div class="seller-field">
+        <label>Product Name</label>
+        <input class="seller-input" id="sellerName" placeholder="e.g. Wireless Noise-Cancelling Headphones" />
+      </div>
+      <div class="seller-field">
+        <label>Price ($)</label>
+        <input class="seller-input" id="sellerPrice" type="number" step="0.01" min="0" placeholder="89.99" />
+      </div>
+      <button class="seller-submit" id="sellerSubmit">List Product</button>
+
+      <div class="seller-what-happens">
+        <h3>What happens next</h3>
+        <div class="pipeline-step">
+          <div class="pipeline-num green">1</div>
+          <div class="pipeline-text"><strong>MongoDB Insert</strong> — product saved with <code>status: "pending_enrichment"</code></div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num green">2</div>
+          <div class="pipeline-text"><strong>Change Stream</strong> fires — Catalog Watcher detects the new insert</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num amber">3</div>
+          <div class="pipeline-text"><strong>Claude 4.5 Haiku</strong> generates description, category, tags, and brand</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num violet">4</div>
+          <div class="pipeline-text"><strong>Voyage AI</strong> embeds the description into a 1024d vector</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num green">5</div>
+          <div class="pipeline-text"><strong>MongoDB Update</strong> — document enriched, <code>status: "active"</code>, searchable</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seller-feed-panel">
+      <h2><span class="feed-live-dot"></span> Live Product Feed <span style="font-weight:400;font-size:0.75rem;color:var(--mongo-muted)">(polls every 2s)</span></h2>
+      <div id="sellerFeed"><div class="empty-results">No products added yet. List one using the form!</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- AI Chat Bubble -->
+<button class="chat-fab" id="chatFab" aria-label="AI Shopping Agent">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/><path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></svg>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div><h3>AI Shopping Agent</h3><span class="chat-header-sub">Powered by Claude &amp; MongoDB</span></div>
+    <button class="chat-close" id="chatClose">&times;</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg assistant">Hi! I'm your AI shopping assistant. I can search products, compare items, and add things to your cart. Try asking me something like <b>"find me a waterproof backpack under $100"</b>.</div>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything about products..." />
+    <button class="chat-send" id="chatSend">Send</button>
+  </div>
+</div>
+
+<!-- Try-On Modal -->
+<div class="tryon-overlay" id="tryonOverlay">
+  <div class="tryon-modal">
+    <div class="tryon-modal-header">
+      <h2 id="tryonTitle">Virtual Try-On</h2>
+      <button class="tryon-modal-close" id="tryonClose">&times;</button>
+    </div>
+    <div class="tryon-body" id="tryonBody">
+      <div class="tryon-product-info" id="tryonProductInfo"></div>
+      <div class="tryon-upload-area" id="tryonUpload">
+        <div class="tryon-upload-label">
+          <strong>Upload Your Photo</strong>
+          Click or drag a photo here for virtual try-on
+        </div>
+      </div>
+      <input type="file" id="tryonFileInput" accept="image/*" style="display:none" />
+      <div class="tryon-actions">
+        <button class="tryon-btn tryon-btn-primary" id="tryonAnalyzeBtn" disabled>Analyze Style</button>
+        <button class="tryon-btn tryon-btn-primary" id="tryonGenerateBtn" disabled>Generate Try-On</button>
+        <button class="tryon-btn tryon-btn-secondary" id="tryonSaveBtn" disabled>Save &amp; Recommend</button>
+      </div>
+      <div class="tryon-results" id="tryonResults" style="display:none">
+        <h3>Style Analysis</h3>
+        <div id="tryonScoreArea"></div>
+        <div class="tryon-analysis" id="tryonAnalysis"></div>
+        <div class="tryon-gen-image" id="tryonGenImage">
+          <div class="tryon-gen-placeholder">Click "Generate Try-On" to create a visualization</div>
+        </div>
+      </div>
+      <div id="tryonRecommendations" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <p>&copy; 2026 <strong>LeafyShop</strong> &mdash; GenAI Workshop Demo &middot; Powered by <strong>MongoDB Atlas Vector Search</strong> &middot; <strong>Voyage AI</strong> Embeddings</p>
 </footer>
@@ -568,6 +967,34 @@
   var drawerBody = document.getElementById("drawerBody");
   var drawerFooter = document.getElementById("drawerFooter");
   var searchBtn = document.getElementById("searchBtn");
+
+  var BEDROCK_API = (window.BEDROCK_API_URL || "");
+  var sellerBtn = document.getElementById("sellerBtn");
+  var chatFab = document.getElementById("chatFab");
+  var chatPanel = document.getElementById("chatPanel");
+  var chatClose = document.getElementById("chatClose");
+  var chatMessages = document.getElementById("chatMessages");
+  var chatInput = document.getElementById("chatInput");
+  var chatSend = document.getElementById("chatSend");
+  var tryonOverlay = document.getElementById("tryonOverlay");
+  var tryonClose = document.getElementById("tryonClose");
+  var tryonUpload = document.getElementById("tryonUpload");
+  var tryonFileInput = document.getElementById("tryonFileInput");
+  var tryonAnalyzeBtn = document.getElementById("tryonAnalyzeBtn");
+  var tryonGenerateBtn = document.getElementById("tryonGenerateBtn");
+  var tryonSaveBtn = document.getElementById("tryonSaveBtn");
+  var tryonResults = document.getElementById("tryonResults");
+  var tryonAnalysis = document.getElementById("tryonAnalysis");
+  var tryonScoreArea = document.getElementById("tryonScoreArea");
+  var tryonGenImage = document.getElementById("tryonGenImage");
+  var tryonProductInfo = document.getElementById("tryonProductInfo");
+  var tryonRecommendations = document.getElementById("tryonRecommendations");
+  var tryonBody = document.getElementById("tryonBody");
+
+  var chatHistory = [];
+  var tryonState = { product: null, imageBase64: null, analysis: null, generatedImage: null };
+
+  var TRYABLE_CATEGORIES = ["Clothing", "Shoes", "Bags & Accessories"];
 
   var CATEGORY_IMAGES = {
     "Shoes": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",
@@ -674,12 +1101,15 @@
             (tags.length ? '<div class="product-tags">' + tags.map(function(t) { return '<span class="product-tag">' + esc(t) + '</span>'; }).join("") + '</div>' : '') +
             '<p class="product-desc">' + esc(p.description || "") + '</p>' +
             '<button class="add-btn" data-idx="' + idx + '">Add to Cart</button>' +
+            (TRYABLE_CATEGORIES.indexOf(p.category) !== -1
+              ? '<button class="add-btn" style="margin-top:0.3rem;background:var(--mongo-slate)" data-tryon="' + idx + '">Try On</button>'
+              : '') +
           '</div>' +
         '</article>'
       );
     }).join("");
 
-    resultsEl.querySelectorAll(".add-btn").forEach(function(btn) {
+    resultsEl.querySelectorAll(".add-btn[data-idx]").forEach(function(btn) {
       btn.addEventListener("click", function(e) {
         e.stopPropagation();
         var i = parseInt(btn.getAttribute("data-idx"), 10);
@@ -687,6 +1117,13 @@
         btn.textContent = "Added!";
         btn.classList.add("added");
         setTimeout(function() { btn.textContent = "Add to Cart"; btn.classList.remove("added"); }, 1200);
+      });
+    });
+    resultsEl.querySelectorAll("[data-tryon]").forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        var i = parseInt(btn.getAttribute("data-tryon"), 10);
+        openTryOn(lastResults[i]);
       });
     });
   }
@@ -846,6 +1283,380 @@
   ordersBtn.addEventListener("click", function() { openDrawer("orders"); });
   drawerClose.addEventListener("click", closeDrawer);
   drawerBackdrop.addEventListener("click", closeDrawer);
+
+  /* ===== SELLER DASHBOARD (full page) ===== */
+  var sellerPage = document.getElementById("sellerPage");
+  var sellerBackBtn = document.getElementById("sellerBackBtn");
+  var shopMain = document.querySelector(".main");
+  var shopFooter = document.querySelector(".footer");
+  var sellerPollTimer = null;
+  var sellerVisible = false;
+
+  function showSellerPage() {
+    sellerVisible = true;
+    shopMain.style.display = "none";
+    shopFooter.style.display = "none";
+    sellerPage.classList.add("visible");
+    sellerBtn.style.borderColor = "var(--mongo-green-light)";
+    startSellerPoll();
+  }
+
+  function hideSellerPage() {
+    sellerVisible = false;
+    sellerPage.classList.remove("visible");
+    shopMain.style.display = "";
+    shopFooter.style.display = "";
+    sellerBtn.style.borderColor = "transparent";
+    stopSellerPoll();
+  }
+
+  function startSellerPoll() {
+    pollSellerFeed();
+    if (sellerPollTimer) clearInterval(sellerPollTimer);
+    sellerPollTimer = setInterval(pollSellerFeed, 2000);
+  }
+
+  function stopSellerPoll() {
+    if (sellerPollTimer) { clearInterval(sellerPollTimer); sellerPollTimer = null; }
+  }
+
+  sellerBtn.addEventListener("click", function() {
+    if (sellerVisible) hideSellerPage();
+    else showSellerPage();
+  });
+  sellerBackBtn.addEventListener("click", hideSellerPage);
+
+  document.getElementById("sellerSubmit").addEventListener("click", function() {
+    var nameEl = document.getElementById("sellerName");
+    var priceEl = document.getElementById("sellerPrice");
+    var name = (nameEl.value || "").trim();
+    var price = parseFloat(priceEl.value);
+    if (!name || isNaN(price) || price <= 0) { showToast("Enter a valid name and price"); return; }
+    var btn = document.getElementById("sellerSubmit");
+    btn.disabled = true; btn.textContent = "Listing...";
+    fetch("/api/seller/add-product", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name, price: price })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      showToast("Listed: " + d.name + " — watch it enrich below!");
+      nameEl.value = ""; priceEl.value = "";
+      pollSellerFeed();
+    })
+    .catch(function() { showToast("Failed to list product"); })
+    .finally(function() { btn.disabled = false; btn.textContent = "List Product"; });
+  });
+
+  function pollSellerFeed() {
+    fetch("/api/seller/recent")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var feed = document.getElementById("sellerFeed");
+        if (!feed) return;
+        var items = data.products || [];
+        if (!items.length) {
+          feed.innerHTML = '<div class="empty-results">No products added yet. List one using the form!</div>';
+          return;
+        }
+        feed.innerHTML = items.map(function(p) {
+          var enriched = p.status !== "pending_enrichment" && p.description;
+          var hasEmbed = p.has_embedding;
+
+          return '<div class="feed-card' + (enriched ? ' enriched' : '') + '">' +
+            '<div class="feed-card-top">' +
+              '<div>' +
+                '<div class="feed-card-name">' + esc(p.name) + '</div>' +
+                '<span class="feed-status ' + (enriched ? 'active' : 'pending') + '">' +
+                  (enriched ? '\u2713 Active — Searchable' : '\u25CF Enriching\u2026') +
+                '</span>' +
+              '</div>' +
+              '<div class="feed-card-price">$' + (p.price || 0).toFixed(2) + '</div>' +
+            '</div>' +
+
+            '<div class="feed-fields">' +
+              '<div class="feed-field ' + (enriched && p.description ? 'filled' : 'empty') + '">' +
+                '<div class="feed-field-label">Description (AI-generated)</div>' +
+                (enriched && p.description
+                  ? esc(p.description)
+                  : 'Waiting for Claude 4.5 Haiku\u2026') +
+              '</div>' +
+
+              '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">' +
+                '<div class="feed-field ' + (enriched && p.category ? 'filled' : 'empty') + '">' +
+                  '<div class="feed-field-label">Category</div>' +
+                  (enriched && p.category ? esc(p.category) : 'Pending\u2026') +
+                '</div>' +
+                '<div class="feed-field ' + (enriched && p.brand ? 'filled' : 'empty') + '">' +
+                  '<div class="feed-field-label">Brand</div>' +
+                  (enriched && p.brand ? esc(p.brand) : 'Pending\u2026') +
+                '</div>' +
+              '</div>' +
+
+              '<div class="feed-field ' + (enriched && p.tags && p.tags.length ? 'filled' : 'empty') + '">' +
+                '<div class="feed-field-label">Tags</div>' +
+                (enriched && p.tags && p.tags.length
+                  ? '<div class="feed-field-tags">' + p.tags.map(function(t) { return '<span class="feed-tag">' + esc(t) + '</span>'; }).join("") + '</div>'
+                  : 'Pending\u2026') +
+              '</div>' +
+
+              '<div class="feed-field ' + (hasEmbed ? 'embedding' : 'embedding-empty') + '">' +
+                '<div class="feed-field-label">Vector Embedding (Voyage AI)</div>' +
+                (hasEmbed
+                  ? '1024 dimensions \u2014 ready for $vectorSearch'
+                  : 'Waiting for Voyage AI\u2026') +
+              '</div>' +
+            '</div>' +
+
+            (enriched
+              ? '<div class="feed-enriched-by">' +
+                  'Enriched by <span class="by-badge">Claude 4.5 Haiku</span> + <span class="by-badge">Voyage AI</span>' +
+                  (p.enriched_at ? ' \u00b7 ' + new Date(p.enriched_at).toLocaleTimeString() : '') +
+                '</div>'
+              : '') +
+          '</div>';
+        }).join("");
+      })
+      .catch(function() {});
+  }
+
+  /* ===== AI CHAT AGENT ===== */
+  var chatOpen = false;
+  chatFab.addEventListener("click", function() {
+    chatOpen = !chatOpen;
+    chatPanel.classList.toggle("open", chatOpen);
+    if (chatOpen) chatInput.focus();
+  });
+  chatClose.addEventListener("click", function() {
+    chatOpen = false;
+    chatPanel.classList.remove("open");
+  });
+
+  function appendChatMsg(cls, html) {
+    var div = document.createElement("div");
+    div.className = "chat-msg " + cls;
+    div.innerHTML = html;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div;
+  }
+
+  function sendChat() {
+    var msg = (chatInput.value || "").trim();
+    if (!msg) return;
+    chatInput.value = "";
+    appendChatMsg("user", esc(msg));
+    chatHistory.push({ role: "user", content: msg });
+
+    chatSend.disabled = true;
+    var thinkingEl = appendChatMsg("thinking", "Thinking...");
+
+    fetch(BEDROCK_API + "/leafy_agent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "chat",
+        message: msg,
+        history: chatHistory.slice(-10),
+        cart: cart
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      thinkingEl.remove();
+      if (data.tool_calls && data.tool_calls.length) {
+        data.tool_calls.forEach(function(tc) {
+          appendChatMsg("tool-info", "🔧 " + esc(tc.tool || tc.name || "tool") + ": " + esc(tc.summary || tc.input || ""));
+        });
+      }
+      var reply = data.reply || data.response || "Sorry, I couldn't process that.";
+      appendChatMsg("assistant", reply.replace(/\n/g, "<br>"));
+      chatHistory.push({ role: "assistant", content: reply });
+
+      if (data.cart_actions && data.cart_actions.length) {
+        data.cart_actions.forEach(function(ca) {
+          addToCart(ca);
+          showToast("Agent added: " + ca.name);
+        });
+      }
+    })
+    .catch(function(err) {
+      thinkingEl.remove();
+      appendChatMsg("assistant", "Sorry, I'm having trouble connecting. Make sure the AI Agent Lambda is deployed.");
+    })
+    .finally(function() { chatSend.disabled = false; });
+  }
+
+  chatSend.addEventListener("click", sendChat);
+  chatInput.addEventListener("keydown", function(e) { if (e.key === "Enter") sendChat(); });
+
+  /* ===== VIRTUAL TRY-ON ===== */
+  function openTryOn(product) {
+    tryonState = { product: product, imageBase64: null, analysis: null, generatedImage: null };
+    tryonResults.style.display = "none";
+    tryonRecommendations.style.display = "none";
+    tryonAnalyzeBtn.disabled = true;
+    tryonGenerateBtn.disabled = true;
+    tryonSaveBtn.disabled = true;
+
+    var img = getProductImage(product);
+    tryonProductInfo.innerHTML =
+      '<img src="' + img + '" alt="" onerror="this.style.display=\'none\'" />' +
+      '<div><div style="font-weight:700">' + esc(product.name) + '</div>' +
+      '<div style="font-size:0.75rem;color:var(--mongo-muted)">' + esc(product.category) + ' &middot; $' + product.price.toFixed(2) + '</div></div>';
+
+    tryonUpload.innerHTML = '<div class="tryon-upload-label"><strong>Upload Your Photo</strong>Click or drag a photo here for virtual try-on</div>';
+    tryonUpload.classList.remove("has-image");
+    tryonGenImage.innerHTML = '<div class="tryon-gen-placeholder">Click "Generate Try-On" to create a visualization</div>';
+
+    tryonOverlay.classList.add("open");
+  }
+
+  tryonClose.addEventListener("click", function() { tryonOverlay.classList.remove("open"); });
+  tryonOverlay.addEventListener("click", function(e) { if (e.target === tryonOverlay) tryonOverlay.classList.remove("open"); });
+
+  tryonUpload.addEventListener("click", function() { tryonFileInput.click(); });
+  tryonFileInput.addEventListener("change", function() {
+    var file = tryonFileInput.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      tryonState.imageBase64 = ev.target.result.split(",")[1];
+      tryonUpload.innerHTML = '<img src="' + ev.target.result + '" alt="Your photo" />';
+      tryonUpload.classList.add("has-image");
+      tryonAnalyzeBtn.disabled = false;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  tryonAnalyzeBtn.addEventListener("click", function() {
+    if (!tryonState.imageBase64 || !tryonState.product) return;
+    tryonAnalyzeBtn.disabled = true;
+    tryonAnalyzeBtn.textContent = "Analyzing...";
+    tryonResults.style.display = "block";
+    tryonAnalysis.textContent = "Running style analysis with Claude Vision...";
+    tryonScoreArea.innerHTML = "";
+
+    fetch(BEDROCK_API + "/leafy_tryon", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "analyze",
+        image_base64: tryonState.imageBase64,
+        product: {
+          name: tryonState.product.name,
+          description: tryonState.product.description || "",
+          category: tryonState.product.category || ""
+        }
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      tryonState.analysis = data;
+      var score = data.compatibility_score || data.score || "?";
+      tryonScoreArea.innerHTML = '<div class="tryon-score">Compatibility: ' + score + '/10</div>';
+      var text = "";
+      if (data.fit_recommendation) text += "Fit: " + data.fit_recommendation + "\n\n";
+      if (data.color_matching) text += "Colors: " + data.color_matching + "\n\n";
+      if (data.styling_tips) text += "Styling Tips: " + data.styling_tips + "\n\n";
+      if (data.body_type_analysis) text += "Body Type: " + data.body_type_analysis;
+      tryonAnalysis.textContent = text || JSON.stringify(data, null, 2);
+      tryonGenerateBtn.disabled = false;
+    })
+    .catch(function() {
+      tryonAnalysis.textContent = "Analysis failed. Make sure the Try-On Lambda is deployed.";
+    })
+    .finally(function() {
+      tryonAnalyzeBtn.textContent = "Analyze Style";
+      tryonAnalyzeBtn.disabled = false;
+    });
+  });
+
+  tryonGenerateBtn.addEventListener("click", function() {
+    if (!tryonState.product) return;
+    tryonGenerateBtn.disabled = true;
+    tryonGenerateBtn.textContent = "Generating...";
+    tryonGenImage.innerHTML = '<div class="tryon-gen-placeholder">Generating try-on image with Nova Canvas...</div>';
+
+    var desc = tryonState.product.description || tryonState.product.name;
+    var styleCtx = tryonState.analysis ? (tryonState.analysis.fit_recommendation || "") : "";
+
+    fetch(BEDROCK_API + "/leafy_tryon", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "generate",
+        prompt: "A person wearing " + desc + ", studio photo, fashion lookbook style, professional lighting",
+        style_context: styleCtx
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.image_base64) {
+        tryonState.generatedImage = data.image_base64;
+        tryonGenImage.innerHTML = '<img src="data:image/png;base64,' + data.image_base64 + '" alt="Try-on result" />';
+        tryonSaveBtn.disabled = false;
+      } else {
+        tryonGenImage.innerHTML = '<div class="tryon-gen-placeholder">Image generation failed. ' + (data.error || "") + '</div>';
+      }
+    })
+    .catch(function() {
+      tryonGenImage.innerHTML = '<div class="tryon-gen-placeholder">Generation failed. Make sure the Try-On Lambda is deployed.</div>';
+    })
+    .finally(function() {
+      tryonGenerateBtn.textContent = "Generate Try-On";
+      tryonGenerateBtn.disabled = false;
+    });
+  });
+
+  tryonSaveBtn.addEventListener("click", function() {
+    if (!tryonState.analysis) return;
+    tryonSaveBtn.disabled = true;
+    tryonSaveBtn.textContent = "Saving...";
+
+    fetch(BEDROCK_API + "/leafy_tryon", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "save",
+        product_id: tryonState.product.id || "",
+        analysis: tryonState.analysis,
+        generated_image_base64: tryonState.generatedImage || "",
+        user_preferences: []
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      showToast("Try-on session saved!");
+      if (data.session_id) {
+        fetch(BEDROCK_API + "/leafy_tryon", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "recommend", session_id: data.session_id })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(recData) {
+          var recs = recData.recommendations || [];
+          if (recs.length) {
+            tryonRecommendations.style.display = "block";
+            tryonRecommendations.innerHTML = '<h3 style="font-size:0.9375rem;font-weight:800;color:var(--mongo-green-dark);margin:1rem 0 0.5rem">Recommended for Your Style</h3>' +
+              '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.5rem">' +
+              recs.map(function(r) {
+                return '<div style="border:1px solid var(--mongo-border);border-radius:8px;padding:0.5rem;font-size:0.8125rem">' +
+                  '<div style="font-weight:700">' + esc(r.name) + '</div>' +
+                  '<div style="color:var(--mongo-muted)">' + esc(r.category || "") + ' &middot; $' + (r.price || 0).toFixed(2) + '</div>' +
+                '</div>';
+              }).join("") +
+              '</div>';
+          }
+        })
+        .catch(function() {});
+      }
+    })
+    .catch(function() { showToast("Failed to save session"); })
+    .finally(function() { tryonSaveBtn.textContent = "Save & Recommend"; tryonSaveBtn.disabled = false; });
+  });
 
   saveCart();
 })();
