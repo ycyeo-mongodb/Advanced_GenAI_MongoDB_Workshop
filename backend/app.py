@@ -250,14 +250,4 @@ def seller_recent(limit: int = Query(10, ge=1, le=30)):
 @app.get("/", response_class=HTMLResponse)
 def root():
     with open("../frontend/index.html") as f:
-        html = f.read()
-    bedrock_api_url = os.environ.get("BEDROCK_API_URL", "")
-    # Inject the Bedrock API URL so the frontend chat can reach the AWS Lambda agent.
-    injected = (
-        f'<script>window.BEDROCK_API_URL={bedrock_api_url!r};</script>'
-    )
-    if "</head>" in html:
-        html = html.replace("</head>", f"{injected}\n</head>", 1)
-    else:
-        html = injected + html
-    return html
+        return f.read()
