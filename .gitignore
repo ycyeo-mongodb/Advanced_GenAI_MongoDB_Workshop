@@ -1,5 +1,4 @@
 .env
-backend/.env
 .venv/
 venv/
 backend/venv/
