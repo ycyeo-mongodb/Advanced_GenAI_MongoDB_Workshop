@@ -5,15 +5,12 @@ Includes mock cart & checkout for workshop interactivity.
 """
 
 import os
-import subprocess
-import sys
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
@@ -248,71 +245,6 @@ def seller_recent(limit: int = Query(10, ge=1, le=30)):
             doc["enriched_at"] = doc["enriched_at"].isoformat()
         items.append(doc)
     return {"products": items}
-
-
-class GenerateRequest(BaseModel):
-    only: Optional[list[str]] = None
-    skip: Optional[list[str]] = None
-    force: bool = False
-    wait_indexes: bool = False
-
-
-@app.post("/api/generate")
-def api_generate(req: GenerateRequest = GenerateRequest()):
-    """Run the workshop-asset generator (scripts/generate.py) and return its summary.
-
-    This is a thin subprocess wrapper so we don't have to add scripts/ to PYTHONPATH
-    or deal with Voyage/Mongo clients being re-initialized inside the request handler.
-    Blocking by design — a full catalog + embed + indexes run can take 60-90 seconds.
-    """
-    repo_root = Path(__file__).resolve().parent.parent
-    script = repo_root / "scripts" / "generate.py"
-    if not script.exists():
-        raise HTTPException(status_code=500, detail=f"Generator not found at {script}")
-
-    cmd = [sys.executable, str(script), "--json"]
-    if req.only:
-        cmd.extend(["--only", ",".join(req.only)])
-    if req.skip:
-        cmd.extend(["--skip", ",".join(req.skip)])
-    if req.force:
-        cmd.append("--force")
-    if req.wait_indexes:
-        cmd.append("--wait-indexes")
-
-    proc = subprocess.run(
-        cmd,
-        cwd=str(repo_root),
-        capture_output=True,
-        text=True,
-        timeout=60 * 10,  # 10 min hard cap
-    )
-
-    if proc.returncode != 0:
-        raise HTTPException(
-            status_code=500,
-            detail={
-                "returncode": proc.returncode,
-                "stderr": proc.stderr.strip().splitlines()[-20:],
-                "stdout_tail": proc.stdout.strip().splitlines()[-20:],
-            },
-        )
-
-    # scripts/generate.py prints the summary prefixed with [generate-json]
-    import json as _json
-    summary = None
-    for line in reversed(proc.stdout.splitlines()):
-        line = line.strip()
-        if line.startswith("[generate-json]"):
-            try:
-                summary = _json.loads(line[len("[generate-json]"):])
-                break
-            except _json.JSONDecodeError:
-                continue
-    if summary is None:
-        # Fall back to raw log if no JSON marker appears (shouldn't happen with --json).
-        summary = {"log_tail": proc.stdout.strip().splitlines()[-40:]}
-    return summary
 
 
 @app.get("/", response_class=HTMLResponse)
